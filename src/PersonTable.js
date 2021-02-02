@@ -1,17 +1,20 @@
 import React, {Component} from 'react'
 import Table from 'react-bootstrap/Table'
 
-class PersonTable extends Component {
-  render() {
-    return (
-      <Table striped bordered hover>
-        <thead>
+const TableHeader = () => {
+  return (
+    <thead>
           <tr>
             <th>Name</th>
             <th>Job</th>
           </tr>
         </thead>
-        <tbody>
+  ) 
+}
+
+const TableBody = () => {
+  return (
+    <tbody>
           <tr>
             <td>Charlie</td>
             <td>Pharmacist</td>
@@ -29,6 +32,15 @@ class PersonTable extends Component {
             <td>Unqualified Teaching Assistant</td>
           </tr>
         </tbody>
+  )
+}
+
+class PersonTable extends Component {
+  render() {
+    return (
+      <Table striped bordered hover>
+        <TableHeader />
+        <TableBody />
       </Table>
     )
   }
