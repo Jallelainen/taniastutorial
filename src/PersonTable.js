@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 
 const TableHeader = () => {
   return (
@@ -7,43 +8,38 @@ const TableHeader = () => {
           <tr>
             <th>Name</th>
             <th>Job</th>
+            <th>Remove</th>
           </tr>
         </thead>
   ) 
 }
 
-const TableBody = () => {
-  return (
-    <tbody>
-          <tr>
-            <td>Charlie</td>
-            <td>Pharmacist</td>
-          </tr>
-          <tr>
-            <td>Mac</td>
-            <td>Unemployed</td>
-          </tr>
-          <tr>
-            <td>Dee</td>
-            <td>Failing actress</td>
-          </tr>
-          <tr>
-            <td>Dennis</td>
-            <td>Unqualified Teaching Assistant</td>
-          </tr>
-        </tbody>
-  )
+const TableBody = (props) => {
+  const rows = props.characterData.map((row, index) =>{
+    return (
+      <tr key={index}>
+        <td>{row.name}</td>
+        <td>{row.job}</td>
+        <td>
+          <Button onClick={()=> props.removeCharacter(index)}>Delete</Button>
+        </td>
+      </tr>
+    )
+  })
+
+ return  <tbody>{rows}</tbody>
 }
 
-class PersonTable extends Component {
-  render() {
+const PersonTable = (props) =>{
+   const {characterData, removeCharacter} = props
+
     return (
       <Table striped bordered hover>
         <TableHeader />
-        <TableBody />
+        <TableBody characterData={characterData}
+        removeCharacter={removeCharacter}/>
       </Table>
     )
-  }
 }
 
-export default Table
+export default PersonTable
